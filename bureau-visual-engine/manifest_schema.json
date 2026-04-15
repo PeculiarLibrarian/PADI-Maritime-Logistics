@@ -1,0 +1,7 @@
+{
+  "branding": "PADI Sovereign Bureau",
+  "aesthetic": "Cyber-Librarian / Architectural Blueprint",
+  "palette": ["#001f3f", "#ffffff", "#39cccc"],
+  "forbidden_elements": ["hallucinated faces", "unstructured chaos", "neon gradients"],
+  "required_elements": ["RDF lattices", "SHACL logic blocks", "Maritime Blueprints"]
+}
