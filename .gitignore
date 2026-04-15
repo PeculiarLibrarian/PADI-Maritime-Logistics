@@ -1,0 +1,4 @@
+node_modules/
+bureau-visual-engine/__pycache__/
+*.log
+.DS_Store
