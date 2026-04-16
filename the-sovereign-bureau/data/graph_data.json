@@ -127,6 +127,66 @@
         {
             "id": "The Sovereign Bureau's deterministic framework for Information Science.",
             "group": "Value"
+        },
+        {
+            "id": "Sovereign_Network",
+            "group": "Object"
+        },
+        {
+            "id": "padi-maritime-logistics",
+            "group": "Value"
+        },
+        {
+            "id": "the-sovereign-bureau",
+            "group": "Value"
+        },
+        {
+            "id": "peculiar-librarian",
+            "group": "Value"
+        },
+        {
+            "id": "samuel-gitandu",
+            "group": "Value"
+        },
+        {
+            "id": "padi-dental-standard",
+            "group": "Value"
+        },
+        {
+            "id": "the-sovereign-bureau-archive",
+            "group": "Value"
+        },
+        {
+            "id": "bureau-visual-engine",
+            "group": "Value"
+        },
+        {
+            "id": "living-library-of-access",
+            "group": "Value"
+        },
+        {
+            "id": "padi-sovereign-node",
+            "group": "Value"
+        },
+        {
+            "id": "samuel-muriithi",
+            "group": "Value"
+        },
+        {
+            "id": "padi-sovereign-bureau",
+            "group": "Value"
+        },
+        {
+            "id": "padi-standard",
+            "group": "Value"
+        },
+        {
+            "id": ".github",
+            "group": "Value"
+        },
+        {
+            "id": "padi-documentation",
+            "group": "Value"
         }
     ],
     "links": [
@@ -304,7 +364,81 @@
             "source": "schema#",
             "target": "The Sovereign Bureau's deterministic framework for Information Science.",
             "label": "comment"
+        },
+        {
+            "source": "Nairobi_01_Node",
+            "target": "Sovereign_Network",
+            "label": "orchestrates"
+        },
+        {
+            "source": "Sovereign_Network",
+            "target": "padi-maritime-logistics",
+            "label": "manages"
+        },
+        {
+            "source": "Sovereign_Network",
+            "target": "the-sovereign-bureau",
+            "label": "manages"
+        },
+        {
+            "source": "Sovereign_Network",
+            "target": "peculiar-librarian",
+            "label": "manages"
+        },
+        {
+            "source": "Sovereign_Network",
+            "target": "samuel-gitandu",
+            "label": "manages"
+        },
+        {
+            "source": "Sovereign_Network",
+            "target": "padi-dental-standard",
+            "label": "manages"
+        },
+        {
+            "source": "Sovereign_Network",
+            "target": "the-sovereign-bureau-archive",
+            "label": "manages"
+        },
+        {
+            "source": "Sovereign_Network",
+            "target": "bureau-visual-engine",
+            "label": "manages"
+        },
+        {
+            "source": "Sovereign_Network",
+            "target": "living-library-of-access",
+            "label": "manages"
+        },
+        {
+            "source": "Sovereign_Network",
+            "target": "padi-sovereign-node",
+            "label": "manages"
+        },
+        {
+            "source": "Sovereign_Network",
+            "target": "samuel-muriithi",
+            "label": "manages"
+        },
+        {
+            "source": "Sovereign_Network",
+            "target": "padi-sovereign-bureau",
+            "label": "manages"
+        },
+        {
+            "source": "Sovereign_Network",
+            "target": "padi-standard",
+            "label": "manages"
+        },
+        {
+            "source": "Sovereign_Network",
+            "target": ".github",
+            "label": "manages"
+        },
+        {
+            "source": "Sovereign_Network",
+            "target": "padi-documentation",
+            "label": "manages"
         }
     ]
-} 
- 
+}
