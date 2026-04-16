@@ -1,41 +1,52 @@
+import requests
 import json
-from rdflib import Graph
+from pathlib import Path
 
-def generate_graph_data(ttl_path, output_path):
-    g = Graph()
-    g.parse(ttl_path, format="turtle")
-    
-    nodes = []
-    links = []
-    seen_nodes = set()
+# --- CONFIGURATION ---
+GITHUB_USERNAME = "PeculiarLibrarian"
+# Note: Use an environment variable for the token in production!
+GITHUB_TOKEN = "your_github_token_here" 
+OUTPUT_PATH = Path(__file__).resolve().parent.parent / "data" / "graph_data.json"
 
-    for s, p, o in g:
-        # Process Subject
-        s_label = str(s).split('#')[-1] or str(s).split('/')[-1]
-        if s_label not in seen_nodes:
-            nodes.append({"id": s_label, "group": "Subject"})
-            seen_nodes.add(s_label)
-        
-        # Process Object
-        o_label = str(o).split('#')[-1] or str(o).split('/')[-1]
-        if o_label not in seen_nodes:
-            # Differentiate Literals from URIs
-            group = "Value" if "http" not in str(o) else "Object"
-            nodes.append({"id": o_label, "group": group})
-            seen_nodes.add(o_label)
-            
-        # Create Link (Predicate)
-        p_label = str(p).split('#')[-1] or str(p).split('/')[-1]
-        links.append({"source": s_label, "target": o_label, "label": p_label})
+def fetch_github_repos():
+    url = f"https://api.github.com/users/{GITHUB_USERNAME}/repos"
+    headers = {"Authorization": f"token {GITHUB_TOKEN}"} if GITHUB_TOKEN else {}
+    response = requests.get(url, headers=headers)
+    if response.status_status == 200:
+        return response.json()
+    return []
 
-    graph_payload = {"nodes": nodes, "links": links}
+def build_network_of_sovereignty():
+    # 1. Start with your existing PADI Core Nodes/Links 
+    # (You can load your current graph_data.json here first to append to it)
     
-    with open(output_path, 'w') as f:
-        json.dump(graph_payload, f, indent=4)
+    graph = {
+        "nodes": [
+            {"id": "Nairobi_01_Node", "group": "Subject"},
+            {"id": "Sovereign_Network", "group": "Object"}
+        ],
+        "links": [
+            {"source": "Nairobi_01_Node", "target": "Sovereign_Network", "label": "orchestrates"}
+        ]
+    }
+
+    # 2. Fetch real-time data
+    repos = fetch_github_repos()
     
-    print(f"[BUREAU] Graph serialized: {len(nodes)} nodes, {len(links)} links.")
-    return len(g)
+    for repo in repos:
+        repo_name = repo["name"]
+        # Filter for relevant PADI-related repos if desired
+        graph["nodes"].append({"id": repo_name, "group": "Value"})
+        graph["links"].append({
+            "source": "Sovereign_Network", 
+            "target": repo_name, 
+            "label": "contains"
+        })
+
+    # 3. Save to the Sovereign Data Sector
+    with open(OUTPUT_PATH, 'w') as f:
+        json.dump(graph, f, indent=4)
+    print(f"Successfully synchronized {len(repos)} nodes to the Network of Sovereignty.")
 
 if __name__ == "__main__":
-    count = generate_graph_data("ontology/padi_core.ttl", "data/graph_data.json")
-    print(f"[BUREAU] Nairobi-01-Node Online. {count} triples active.")
+    build_network_of_sovereignty()
