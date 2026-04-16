@@ -1,52 +1,71 @@
 import requests
 import json
+import os
 from pathlib import Path
 
 # --- CONFIGURATION ---
 GITHUB_USERNAME = "PeculiarLibrarian"
-# Note: Use an environment variable for the token in production!
-GITHUB_TOKEN = "your_github_token_here" 
-OUTPUT_PATH = Path(__file__).resolve().parent.parent / "data" / "graph_data.json"
+# On Free Tier, a PAT is highly recommended to reach the 5k rate limit.
+# For now, we will try it without a token, or you can paste one below.
+GITHUB_TOKEN = os.getenv("GITHUB_TOKEN", "") 
 
-def fetch_github_repos():
-    url = f"https://api.github.com/users/{GITHUB_USERNAME}/repos"
+# Paths
+BASE_DIR = Path(__file__).resolve().parent.parent
+DATA_PATH = BASE_DIR / "data" / "graph_data.json"
+
+def fetch_repos():
+    """Fetches public repositories for the Librarian."""
+    url = f"https://api.github.com/users/{GITHUB_USERNAME}/repos?sort=updated"
     headers = {"Authorization": f"token {GITHUB_TOKEN}"} if GITHUB_TOKEN else {}
-    response = requests.get(url, headers=headers)
-    if response.status_status == 200:
-        return response.json()
-    return []
-
-def build_network_of_sovereignty():
-    # 1. Start with your existing PADI Core Nodes/Links 
-    # (You can load your current graph_data.json here first to append to it)
     
-    graph = {
-        "nodes": [
-            {"id": "Nairobi_01_Node", "group": "Subject"},
-            {"id": "Sovereign_Network", "group": "Object"}
-        ],
-        "links": [
-            {"source": "Nairobi_01_Node", "target": "Sovereign_Network", "label": "orchestrates"}
-        ]
-    }
+    try:
+        response = requests.get(url, headers=headers)
+        response.raise_for_status()
+        return response.json()
+    except Exception as e:
+        print(f"⚠️ Liaison Connection Failed: {e}")
+        return []
 
-    # 2. Fetch real-time data
-    repos = fetch_github_repos()
+def update_sovereign_graph():
+    # 1. Load the existing "Hand-Crafted" Ontology first
+    if DATA_PATH.exists():
+        with open(DATA_PATH, 'r') as f:
+            graph = json.load(f)
+    else:
+        graph = {"nodes": [], "links": []}
+
+    # 2. Add a 'Sovereign Network' Anchor if it doesn't exist
+    if not any(n['id'] == "Sovereign_Network" for n in graph['nodes']):
+        graph["nodes"].append({"id": "Sovereign_Network", "group": "Object"})
+        graph["links"].append({
+            "source": "Nairobi_01_Node", 
+            "target": "Sovereign_Network", 
+            "label": "orchestrates"
+        })
+
+    # 3. Fetch Real-Time Repository Data
+    print("📡 Liaison Agent: Dialing GitHub API...")
+    repos = fetch_repos()
     
     for repo in repos:
         repo_name = repo["name"]
-        # Filter for relevant PADI-related repos if desired
-        graph["nodes"].append({"id": repo_name, "group": "Value"})
-        graph["links"].append({
-            "source": "Sovereign_Network", 
-            "target": repo_name, 
-            "label": "contains"
-        })
+        
+        # Avoid duplicates
+        if not any(n['id'] == repo_name for n in graph['nodes']):
+            # Add Repo as a Value Node (Gold)
+            graph["nodes"].append({"id": repo_name, "group": "Value"})
+            # Link it to the Network Object
+            graph["links"].append({
+                "source": "Sovereign_Network", 
+                "target": repo_name, 
+                "label": "manages"
+            })
 
-    # 3. Save to the Sovereign Data Sector
-    with open(OUTPUT_PATH, 'w') as f:
+    # 4. Save the expanded Truth Source
+    with open(DATA_PATH, 'w') as f:
         json.dump(graph, f, indent=4)
-    print(f"Successfully synchronized {len(repos)} nodes to the Network of Sovereignty.")
+    
+    print(f"✅ Success: {len(repos)} Repositories linked to the Sovereign Network.")
 
 if __name__ == "__main__":
-    build_network_of_sovereignty()
+    update_sovereign_graph()
