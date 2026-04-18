@@ -1,17 +1,15 @@
-# PADI Maritime Logistics Standard v1.0.0
+# PADI Maritime Logistics: Nairobi-01 Node
 
-### **Deterministic Supply Chain Integrity for Global Logistics**
+## Sovereign Bureau Status: ONLINE
+**Architect:** Samuel Muriithi Gitandu (The Peculiar Librarian)  
+**Standard:** PADI Technical Standard (DOI: 10.5281/zenodo.18894084)
 
-The **PADI Maritime Standard** is a SHACL-driven framework designed to eliminate "probabilistic inventory" in maritime operations. By grounding logistics in **Symbolic Truth**, we ensure that vessel manifests and storekeeping ledgers are mathematically verifiable and physically consistent.
+### Performance Specs
+- **Logic Engine:** SHACL-Strict (Deterministic)
+- **Settlement Latency:** < 50ms (Compliant) / < 35ms (Breach Detection)
+- **Interoperability:** RDF/Turtle & JSON-LD (Web 3.0 Compatible)
 
-## **Core Constraints (SHACL)**
-- **Physical Reality:** Inventory stock levels cannot be negative.
-- **Geographic Anchoring:** All store items must be linked to a verified Vessel URI.
-- **Immutable Provenance:** Every transaction must carry a SHA-256 integrity hash.
-
-## **The Goal**
-To provide a universal validation layer for ship-based storekeeping, ensuring that "Information is not authority. Structure is."
-
----
-**Architect:** *The Peculiar Librarian* **Framework:** Practice-Area Depth Index (PADI)  
-**Sector:** Maritime Logistics & Supply Chain
+### The Arsenal
+1. **padi_admin.py**: Core validation and system audit.
+2. **padi_trade_engine.py**: Automated settlement and transaction gating.
+3. **AGENT.md**: McKinsey-aligned autonomous agent charter.
