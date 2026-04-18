@@ -1,37 +1,32 @@
 import streamlit as st
-import pandas as pd
-import json
 
-st.set_page_config(page_title="PADI Sovereign Bureau", page_icon="🚢", layout="wide")
+st.set_page_config(page_title="PADI Sovereign Bureau", layout="wide", page_icon="🏛️")
 
-st.title("🚢 PADI Sovereign Bureau: N-1 Nairobi")
-st.markdown("### Maritime Logistics & Safety Integrity Portal")
+st.title("🏛️ Nairobi-01 Node: Sovereign Bureau")
+st.sidebar.markdown("### The Peculiar Librarian\n**Global IP & Audit Node**")
 
-# Load the local files we just pushed
-def load_data(file_path):
-    with open(file_path, 'r') as f:
-        return json.load(f)
+tabs = st.tabs(["🛒 IP Storefront", "📥 Secure Intake", "🛡️ Settlement Logic"])
 
-col1, col2 = st.columns(2)
+with tabs[0]:
+    st.header("Intellectual Property & Services")
+    col1, col2 = st.columns(2)
+    
+    with col1:
+        st.info("### 📦 PADI Standard v2.1")
+        st.write("Complete technical documentation and SHACL schemas.")
+        st.link_button("View on Gumroad (Reviews)", "https://gumroad.com", use_container_width=True)
+        
+    with col2:
+        st.info("### 🔍 Institutional Audit")
+        st.write("One-on-one maritime data validation via Wise/Payoneer.")
+        st.link_button("Request B2B Invoice", "mailto:samuel@example.com", use_container_width=True)
 
-with col1:
-    st.subheader("Section I: Logistics Audit")
-    try:
-        audit_data = load_data('maritime_audit.json')
-        df = pd.DataFrame(audit_data['results'])
-        st.table(df)
-        st.success(f"Verified Audit ID: {audit_data.get('timestamp', '20260417')}-MAR-ALPHA")
-    except Exception as e:
-        st.error("Logistics data not found.")
-
-with col2:
-    st.subheader("Section II: Safety Readiness")
-    try:
-        safety_data = load_data('safety_drill_log.json')
-        st.json(safety_data)
-        st.metric("Drill Status", "COMPLETED", delta="SOLAS Compliant")
-    except Exception as e:
-        st.error("Safety logs not found.")
-
-st.divider()
-st.info("System Perspective: The Peculiar Librarian | Node: Nairobi-01")
+with tabs[2]:
+    st.header("Financial Sovereignty")
+    st.write("This node utilizes a **Multi-Rail Settlement System**:")
+    st.markdown("""
+    * **Tier 1 (Retail):** Gumroad (Credit Card / Apple Pay)
+    * **Tier 2 (Institutional):** Wise (Direct Bank Transfer)
+    * **Tier 3 (Alternative):** Payoneer Global Core
+    """)
+    st.success("Redundancy Level: High (Sovereign Compliant)")
