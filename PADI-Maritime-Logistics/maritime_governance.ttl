@@ -1,14 +1,14 @@
 @prefix sh: <http://www.w3.org/ns/shacl#> .
-@prefix ex: <http://example.org/padi#> .
+@prefix padi: <http://example.org/padi#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 
-ex:VesselShape a sh:NodeShape ;
-    sh:targetClass ex:Vessel ;
+padi:VesselShape a sh:NodeShape ;
+    sh:targetClass padi:Vessel ;
     sh:closed true ;  # Strictly forbids any property not defined here
     sh:ignoredProperties ( rdf:type ) ;
     sh:property [
-        sh:path ex:vesselID ;
+        sh:path padi:vesselID ;
         sh:datatype xsd:string ;
         sh:minCount 1 ; # MUST have an ID
         sh:maxCount 1 ;

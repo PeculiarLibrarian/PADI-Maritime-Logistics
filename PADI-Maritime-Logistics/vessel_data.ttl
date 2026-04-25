@@ -1,5 +1,5 @@
-@prefix ex: <http://example.org/padi#> .
+@prefix padi: <http://example.org/padi#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
-ex:Ship_01 a ex:Vessel ;
-    ex:vesselID "NB-01-NODE"^^xsd:string .
+padi:Ship_01 a padi:Vessel ;
+    padi:vesselID "NB-01-NODE"^^xsd:string .

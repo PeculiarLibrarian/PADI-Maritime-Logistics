@@ -1,2 +1,2 @@
-@prefix ex: <http://example.org/padi#> . 
-ex:GhostShip a ex:UnknownType .
+@prefix padi: <http://example.org/padi#> . 
+padi:GhostShip a padi:UnknownType .
