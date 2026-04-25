@@ -54,3 +54,17 @@ if __name__ == "__main__":
         elif action == "audit": agent.audit_fleet()
     else:
         print("Liaison Active. Commands: status, unify, audit")
+
+def maintain_shelves():
+    import os
+    shelves = [
+        os.path.expanduser("~/the-library/peculiar-shelf/reports/"),
+        os.path.expanduser("~/the-library/peculiar-shelf/ontologies/")
+    ]
+    for shelf in shelves:
+        if not os.path.exists(shelf):
+            os.makedirs(shelf, exist_ok=True)
+            print(f"🔗 Liaison: Constructed missing shelf -> {shelf}")
+
+if __name__ == "__main__":
+    maintain_shelves()
